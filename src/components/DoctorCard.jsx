@@ -22,7 +22,7 @@ export default function DoctorCard({ doctor, onViewProfile }) {
       <CardContent
         sx={{ flexGrow: 1, display: "flex", flexDirection: "column", gap: 1.5 }}
       >
-        <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 1 }}>
+        <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: 1, minHeight: 56 }}>
           <Typography
             variant="h6"
             sx={{ fontSize: "16px", fontWeight: 700, letterSpacing: "-0.2px" }}
@@ -40,28 +40,31 @@ export default function DoctorCard({ doctor, onViewProfile }) {
           />
         </Box>
 
-        {rating != null && (
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              pt: 1.5,
-              borderTop: 1,
-              borderColor: "divider",
-            }}
-          >
-            <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-              <Typography variant="body2" fontWeight={800}>
-                {rating.toFixed(1)}
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          {rating != null ? (
+            <>
+              <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                <Typography variant="body2" fontWeight={800}>
+                  {rating.toFixed(1)}
+                </Typography>
+                <Stars value={rating} />
+              </Box>
+              <Typography variant="caption" color="text.secondary">
+                {reviewCount} recenzii
               </Typography>
-              <Stars value={rating} />
-            </Box>
-            <Typography variant="caption" color="text.secondary">
-              {reviewCount} recenzii
+            </>
+          ) : (
+            <Typography variant="caption" color="text.disabled">
+              Nicio recenzie încă
             </Typography>
-          </Box>
-        )}
+          )}
+        </Box>
 
         <Box
           sx={{

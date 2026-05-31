@@ -62,8 +62,8 @@ export const doctors = [
     specialty: "Pediatrie",
     clinic: "LittleSteps Medical",
     location: "Timișoara",
-    rating: 4.7,
-    reviewCount: 18,
+    rating: null,
+    reviewCount: 0,
     reviews: []
   },
   {
@@ -73,8 +73,12 @@ export const doctors = [
     clinic: "MoveWell Ortopedie",
     location: "Iași",
     rating: 4.3,
-    reviewCount: 9,
-    reviews: []
+    reviewCount: 3,
+    reviews: [
+      { id: "r4-1", author: "G. M.", date: "2025-11-05", rating: 5, text: "Operație reușită, recuperare rapidă. Mulțumesc pentru profesionalism." },
+      { id: "r4-2", author: "T. L.", date: "2025-09-18", rating: 4, text: "Consultul a fost detaliat. Puțin timp de așteptare, dar merită." },
+      { id: "r4-3", author: "D. C.", date: "2025-07-02", rating: 4, text: "Explicații clare despre tratament, am înțeles tot ce trebuia să fac." }
+    ]
   },
   {
     id: 5,
@@ -83,8 +87,12 @@ export const doctors = [
     clinic: "NeuroPoint",
     location: "București",
     rating: 4.6,
-    reviewCount: 31,
-    reviews: []
+    reviewCount: 3,
+    reviews: [
+      { id: "r5-1", author: "R. B.", date: "2025-12-01", rating: 5, text: "Cel mai bun neurolog la care am fost. Ascultă cu atenție și explică pe înțeles." },
+      { id: "r5-2", author: "M. S.", date: "2025-10-14", rating: 4, text: "Consultul a durat mai puțin decât mă așteptam, dar am primit toate răspunsurile." },
+      { id: "r5-3", author: "A. D.", date: "2025-08-22", rating: 5, text: "Am revenit pentru control și am fost impresionat de cât de bine ține evidența pacienților." }
+    ]
   },
   {
     id: 6,
@@ -93,8 +101,12 @@ export const doctors = [
     clinic: "PrimaryCare Hub",
     location: "Brașov",
     rating: 4.2,
-    reviewCount: 7,
-    reviews: []
+    reviewCount: 3,
+    reviews: [
+      { id: "r6-1", author: "O. P.", date: "2025-11-20", rating: 4, text: "Medicul de familie ideal — disponibil, calm și orientat spre pacient." },
+      { id: "r6-2", author: "L. V.", date: "2025-09-05", rating: 5, text: "M-a îndrumat rapid către specialistul potrivit. Comunicare foarte bună." },
+      { id: "r6-3", author: "C. N.", date: "2025-06-30", rating: 4, text: "Cabinet ordonat, personal amabil. Recomand pentru consultații de rutină." }
+    ]
   },
   {
     id: 7,
@@ -103,8 +115,12 @@ export const doctors = [
     clinic: "MetaboHealth",
     location: "Constanța",
     rating: 4.5,
-    reviewCount: 15,
-    reviews: []
+    reviewCount: 3,
+    reviews: [
+      { id: "r7-1", author: "I. F.", date: "2025-10-08", rating: 5, text: "A identificat rapid problema și mi-a ajustat tratamentul. Rezultate vizibile în 3 săptămâni." },
+      { id: "r7-2", author: "B. M.", date: "2025-08-11", rating: 4, text: "Consultul a fost complet, analize bine interpretate. Aș fi vrut mai mult timp pentru întrebări." },
+      { id: "r7-3", author: "E. T.", date: "2025-05-17", rating: 4, text: "Profesionistă și atentă la detalii. Programările sunt respectate cu punctualitate." }
+    ]
   },
   {
     id: 8,
@@ -113,8 +129,12 @@ export const doctors = [
     clinic: "ClearView Ochi",
     location: "Sibiu",
     rating: 4.1,
-    reviewCount: 6,
-    reviews: []
+    reviewCount: 3,
+    reviews: [
+      { id: "r8-1", author: "H. A.", date: "2025-11-15", rating: 4, text: "Consultul a fost rapid și eficient. Ochelarii recomandați sunt perfecți." },
+      { id: "r8-2", author: "K. S.", date: "2025-09-28", rating: 4, text: "Cabinet dotat modern. Explicații clare despre starea ochilor." },
+      { id: "r8-3", author: "N. G.", date: "2025-07-10", rating: 4, text: "Am revenit an de an. Nu am avut niciodată o problemă cu programarea sau consultul." }
+    ]
   },
   {
     id: 9,
@@ -123,7 +143,11 @@ export const doctors = [
     clinic: "WomenFirst",
     location: "Oradea",
     rating: 4.9,
-    reviewCount: 44,
-    reviews: []
+    reviewCount: 3,
+    reviews: [
+      { id: "r9-1", author: "S. R.", date: "2025-12-10", rating: 5, text: "Am trecut prin sarcină cu toată încrederea datorită ei. Empatie și profesionalism la cel mai înalt nivel." },
+      { id: "r9-2", author: "V. I.", date: "2025-10-03", rating: 5, text: "Recomand tuturor prietenelor mele. Răspunde la întrebări cu răbdare și claritate." },
+      { id: "r9-3", author: "P. C.", date: "2025-08-19", rating: 5, text: "Cea mai bună experiență medicală pe care am avut-o. Mă simt în siguranță la fiecare vizită." }
+    ]
   }
 ];

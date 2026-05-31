@@ -135,6 +135,7 @@ export default function App() {
                   background: "none",
                   border: "none",
                   cursor: "pointer",
+                  color: "inherit",
                   p: 0,
                   textAlign: "left",
                 }}

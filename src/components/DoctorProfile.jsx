@@ -4,6 +4,7 @@ import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import RateReviewOutlinedIcon from "@mui/icons-material/RateReviewOutlined";
 import Stars from "./Stars.jsx";
 import { getDoctorRating, getDoctorReviewCount } from "../utils/doctorUtils.js";
 
@@ -123,12 +124,25 @@ export default function DoctorProfile({ doctor, onBack }) {
           </Box>
 
           {reviews.length === 0 ? (
-            <Paper variant="outlined" sx={{ p: 2.5 }}>
-              <Typography fontWeight={800} sx={{ mb: 0.75 }}>
-                Încă nu există recenzii afișate
+            <Paper
+              variant="outlined"
+              role="status"
+              aria-label="Nicio recenzie disponibilă"
+              sx={{ p: { xs: 3, sm: 4 }, textAlign: "center" }}
+            >
+              <RateReviewOutlinedIcon
+                aria-hidden="true"
+                sx={{ fontSize: 40, color: "text.disabled", mb: 1.5 }}
+              />
+              <Typography fontWeight={700} sx={{ mb: 0.75 }}>
+                Nicio recenzie încă
               </Typography>
-              <Typography variant="body2" color="text.secondary" sx={{ lineHeight: 1.5 }}>
-                Acesta este un profil mock. Vom popula ulterior cu recenzii colectate din surse publice.
+              <Typography
+                variant="body2"
+                color="text.secondary"
+                sx={{ lineHeight: 1.6, maxWidth: 360, mx: "auto" }}
+              >
+                Nu am găsit recenzii pentru acest medic. În viitor vom agrega recenzii din surse publice verificate.
               </Typography>
             </Paper>
           ) : (
