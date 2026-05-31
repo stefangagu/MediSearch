@@ -1,6 +1,5 @@
 import React, { useMemo, useState } from "react";
 import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Badge from "@mui/material/Badge";
@@ -8,7 +7,9 @@ import IconButton from "@mui/material/IconButton";
 import TextField from "@mui/material/TextField";
 import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
+import Divider from "@mui/material/Divider";
 import CloseIcon from "@mui/icons-material/Close";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import Dropdown from "./Dropdown.jsx";
 import { SPECIALTY_COLORS } from "../data/specialtyColors.js";
 
@@ -29,8 +30,7 @@ export default function Filters({
   }, [allSpecialties, query]);
 
   return (
-    <Paper
-      variant="outlined"
+    <Box
       sx={{
         display: "flex",
         justifyContent: "space-between",
@@ -38,7 +38,6 @@ export default function Filters({
         gap: 2,
         px: 2.5,
         py: 1.75,
-        mt: 2.25,
         flexWrap: { xs: "wrap", sm: "nowrap" },
       }}
     >
@@ -59,11 +58,7 @@ export default function Filters({
                 aria-expanded={isOpen}
                 aria-controls="specialties-panel"
                 onClick={toggle}
-                endIcon={
-                  <span aria-hidden="true" style={{ fontSize: 12, color: "inherit", lineHeight: 1 }}>
-                    ▾
-                  </span>
-                }
+                endIcon={<KeyboardArrowDownIcon />}
               >
                 Specializări
               </Button>
@@ -167,6 +162,6 @@ export default function Filters({
       >
         {resultsCount} {resultsCount === 1 ? "rezultat" : "rezultate"}
       </Typography>
-    </Paper>
+    </Box>
   );
 }

@@ -6,6 +6,7 @@ import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
+import Divider from "@mui/material/Divider";
 import Paper from "@mui/material/Paper";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
@@ -187,15 +188,17 @@ export default function App() {
               <DoctorProfile doctor={activeDoctor} onBack={handleBackToList} />
             ) : (
               <>
-                <SearchBar value={search} onChange={setSearch} />
-
-                <Filters
+                <Paper variant="outlined">
+                  <SearchBar value={search} onChange={setSearch} />
+                  <Divider />
+                  <Filters
                   selectedSpecialties={selectedSpecialties}
                   allSpecialties={specialtiesRO}
                   onToggleSpecialty={handleToggleSpecialty}
                   onClear={handleClear}
                   resultsCount={filteredDoctors.length}
                 />
+                </Paper>
 
                 {filteredDoctors.length === 0 ? (
                   <Paper
