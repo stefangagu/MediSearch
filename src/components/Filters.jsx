@@ -10,6 +10,7 @@ import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import CloseIcon from "@mui/icons-material/Close";
 import Dropdown from "./Dropdown.jsx";
+import { SPECIALTY_COLORS } from "../data/specialtyColors.js";
 
 export default function Filters({
   selectedSpecialties,
@@ -118,12 +119,27 @@ export default function Filters({
                           sx={{ color: "primary.main" }}
                         />
                       }
-                      label={<Typography variant="body2">{s}</Typography>}
+                      label={
+                        <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 1 }}>
+                          <Typography variant="body2">{s}</Typography>
+                          <Box
+                            sx={{
+                              width: 14,
+                              height: 14,
+                              borderRadius: "3px",
+                              bgcolor: SPECIALTY_COLORS[s] ?? "#6b7280",
+                              flexShrink: 0,
+                            }}
+                          />
+                        </Box>
+                      }
                       sx={{
                         m: 0,
                         px: 1,
                         py: 0.75,
                         borderRadius: "10px",
+                        width: "100%",
+                        "& .MuiFormControlLabel-label": { flex: 1 },
                         "&:hover": { bgcolor: "action.hover" },
                       }}
                     />

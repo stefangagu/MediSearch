@@ -6,6 +6,7 @@ import Typography from "@mui/material/Typography";
 import Chip from "@mui/material/Chip";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
+import { SPECIALTY_COLORS } from "../data/specialtyColors.js";
 
 function Stars({ value }) {
   const rounded = Math.round(value);
@@ -37,19 +38,23 @@ export default function DoctorCard({ doctor, onViewProfile }) {
       <CardContent
         sx={{ flexGrow: 1, display: "flex", flexDirection: "column", gap: 1.5 }}
       >
-        <Typography
-          variant="h6"
-          sx={{ fontSize: "16px", fontWeight: 700, letterSpacing: "-0.2px", mb: 0 }}
-        >
-          {doctor.name}
-        </Typography>
-
-        <Chip
-          label={doctor.specialty}
-          color="primary"
-          variant="outlined"
-          size="small"
-        />
+        <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 1 }}>
+          <Typography
+            variant="h6"
+            sx={{ fontSize: "16px", fontWeight: 700, letterSpacing: "-0.2px" }}
+          >
+            {doctor.name}
+          </Typography>
+          <Chip
+            label={doctor.specialty}
+            size="small"
+            sx={{
+              flexShrink: 0,
+              bgcolor: SPECIALTY_COLORS[doctor.specialty] ?? "#6b7280",
+              color: "#fff",
+            }}
+          />
+        </Box>
 
         {rating != null && (
           <Box
