@@ -7,28 +7,12 @@ import Chip from "@mui/material/Chip";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import { SPECIALTY_COLORS } from "../data/specialtyColors.js";
-
-function Stars({ value }) {
-  const rounded = Math.round(value);
-  const stars = Array.from({ length: 5 }, (_, i) =>
-    i < rounded ? "★" : "☆"
-  ).join("");
-
-  return (
-    <Typography component="span" color="primary">
-      {stars}
-    </Typography>
-  );
-}
+import Stars from "./Stars.jsx";
+import { getDoctorRating, getDoctorReviewCount } from "../utils/doctorUtils.js";
 
 export default function DoctorCard({ doctor, onViewProfile }) {
-  const rating =
-    Number.isFinite(doctor.rating) ? doctor.rating : null;
-
-  const reviewCount =
-    Number.isFinite(doctor.reviewCount)
-      ? doctor.reviewCount
-      : doctor.reviews?.length ?? 0;
+  const rating = getDoctorRating(doctor);
+  const reviewCount = getDoctorReviewCount(doctor);
 
   return (
     <Card

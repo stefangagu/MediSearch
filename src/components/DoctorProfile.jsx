@@ -4,6 +4,8 @@ import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import Stars from "./Stars.jsx";
+import { getDoctorRating, getDoctorReviewCount } from "../utils/doctorUtils.js";
 
 function formatDateRO(iso) {
   try {
@@ -14,19 +16,9 @@ function formatDateRO(iso) {
   }
 }
 
-function Stars({ value }) {
-  const full = Math.round(value);
-  const stars = Array.from({ length: 5 }, (_, i) => (i < full ? "★" : "☆")).join("");
-  return (
-    <Typography component="span" color="primary" aria-label={`${value} din 5`}>
-      {stars}
-    </Typography>
-  );
-}
-
 export default function DoctorProfile({ doctor, onBack }) {
-  const rating = Number.isFinite(doctor.rating) ? doctor.rating : null;
-  const reviewCount = Number.isFinite(doctor.reviewCount) ? doctor.reviewCount : (doctor.reviews?.length ?? 0);
+  const rating = getDoctorRating(doctor);
+  const reviewCount = getDoctorReviewCount(doctor);
 
   const reviews = useMemo(() => {
     const list = Array.isArray(doctor.reviews) ? doctor.reviews : [];
@@ -72,7 +64,8 @@ export default function DoctorProfile({ doctor, onBack }) {
             aria-label="Rating"
             sx={{
               borderRadius: "14px",
-              p: "12px 14px",
+              px: 1.75,
+              py: 1.5,
               textAlign: { xs: "left", sm: "right" },
               minWidth: { sm: 160 },
               width: { xs: "100%", sm: "auto" },

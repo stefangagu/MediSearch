@@ -38,7 +38,7 @@ export default function Dropdown({ trigger, children, id, ariaLabel }) {
           },
         }}
       >
-        <Box sx={{ p: "0.7rem" }}>
+        <Box sx={{ p: 1.5 }}>
           {children({ close })}
         </Box>
       </Popover>
