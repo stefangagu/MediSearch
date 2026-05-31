@@ -17,7 +17,7 @@ export default function DoctorCard({ doctor, onViewProfile }) {
   return (
     <Card
       variant="outlined"
-      sx={{ borderRadius: "14px", display: "flex", flexDirection: "column", height: "100%" }}
+      sx={{ display: "flex", flexDirection: "column", height: "100%" }}
     >
       <CardContent
         sx={{ flexGrow: 1, display: "flex", flexDirection: "column", gap: 1.5 }}
@@ -95,6 +95,7 @@ export default function DoctorCard({ doctor, onViewProfile }) {
         <Button
           variant="contained"
           size="small"
+          fullWidth
           onClick={() => onViewProfile(doctor.id)}
         >
           Vezi profilul

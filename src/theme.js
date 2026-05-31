@@ -1,6 +1,6 @@
 import { createTheme } from "@mui/material/styles";
 
-const baseShape = { borderRadius: 14 };
+const baseShape = { borderRadius: 6 };
 
 const baseTypography = {
   fontFamily:

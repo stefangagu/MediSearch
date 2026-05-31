@@ -123,14 +123,26 @@ export default function App() {
           <Box sx={CONTAINER_SX}>
             <Toolbar
               disableGutters
-              sx={{ justifyContent: "space-between", py: 1 }}
+              sx={{ justifyContent: "space-between", py: 2 }}
             >
-              <Box sx={{ display: "flex", alignItems: "center", gap: 1.75 }}>
+              <Box
+                component="button"
+                onClick={handleBackToList}
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 1.75,
+                  background: "none",
+                  border: "none",
+                  cursor: "pointer",
+                  p: 0,
+                  textAlign: "left",
+                }}
+              >
                 <Avatar
                   aria-hidden="true"
                   sx={{
                     bgcolor: "primary.main",
-                    borderRadius: "12px",
                     width: 44,
                     height: 44,
                     fontWeight: 800,
@@ -151,7 +163,7 @@ export default function App() {
                     color="text.secondary"
                     sx={{ mt: 0.5, lineHeight: 1.4 }}
                   >
-                    Director medical minimalist cu căutare rapidă și filtre pe specializări.
+                    Transparență asupra medicilor: specializări, clinici și recenzii.
                   </Typography>
                 </Box>
               </Box>
@@ -159,7 +171,7 @@ export default function App() {
               <IconButton
                 onClick={toggleTheme}
                 aria-label={theme === "dark" ? "Activează modul luminos" : "Activează modul întunecat"}
-                sx={{ border: 1, borderColor: "divider", borderRadius: "12px" }}
+                sx={{ border: 1, borderColor: "divider" }}
               >
                 {theme === "dark" ? <LightModeIcon /> : <DarkModeIcon />}
               </IconButton>
@@ -189,7 +201,7 @@ export default function App() {
                     variant="outlined"
                     role="status"
                     aria-live="polite"
-                    sx={{ borderRadius: "14px", p: 4, mt: 2.25 }}
+                    sx={{ p: 4, mt: 2.25 }}
                   >
                     <Typography
                       variant="h6"

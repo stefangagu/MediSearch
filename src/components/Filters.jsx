@@ -38,7 +38,6 @@ export default function Filters({
         gap: 2,
         px: 2.5,
         py: 1.75,
-        borderRadius: "14px",
         mt: 2.25,
         flexWrap: { xs: "wrap", sm: "nowrap" },
       }}
@@ -98,7 +97,6 @@ export default function Filters({
                   mt: 1.5,
                   border: 1,
                   borderColor: "divider",
-                  borderRadius: "12px",
                   maxHeight: 260,
                   overflow: "auto",
                   p: 1,
@@ -138,7 +136,6 @@ export default function Filters({
                         m: 0,
                         px: 1,
                         py: 0.75,
-                        borderRadius: "10px",
                         width: "100%",
                         "& .MuiFormControlLabel-label": { flex: 1 },
                         "&:hover": { bgcolor: "action.hover" },

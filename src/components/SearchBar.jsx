@@ -1,5 +1,5 @@
 import React from "react";
-import Box from "@mui/material/Box";
+import Paper from "@mui/material/Paper";
 import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
 import SearchIcon from "@mui/icons-material/Search";
@@ -7,14 +7,9 @@ import Typography from "@mui/material/Typography";
 
 export default function SearchBar({ value, onChange }) {
   return (
-    <Box
-      sx={{
-        bgcolor: "background.paper",
-        border: 1,
-        borderColor: "divider",
-        borderRadius: "14px",
-        p: 3,
-      }}
+    <Paper
+      variant="outlined"
+      sx={{ px: 2.5, py: 1.75 }}
     >
       <TextField
         fullWidth
@@ -42,6 +37,6 @@ export default function SearchBar({ value, onChange }) {
       >
         Exemplu: „București", „Cardiologie" sau numele unei clinici.
       </Typography>
-    </Box>
+    </Paper>
   );
 }

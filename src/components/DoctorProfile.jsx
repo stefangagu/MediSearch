@@ -29,15 +29,15 @@ export default function DoctorProfile({ doctor, onBack }) {
     <Box sx={{ display: "grid", gap: 2 }}>
       <Button
         type="button"
-        variant="outlined"
+        variant="text"
         startIcon={<ArrowBackIcon />}
         onClick={onBack}
-        sx={{ alignSelf: "flex-start" }}
+        sx={{ justifySelf: "start" }}
       >
         Înapoi
       </Button>
 
-      <Paper variant="outlined" sx={{ borderRadius: "14px", p: { xs: 2.5, md: 3 } }}>
+      <Paper variant="outlined" sx={{ p: { xs: 2.5, md: 3 } }}>
         <Box
           sx={{
             display: "flex",
@@ -123,7 +123,7 @@ export default function DoctorProfile({ doctor, onBack }) {
           </Box>
 
           {reviews.length === 0 ? (
-            <Paper variant="outlined" sx={{ borderRadius: "14px", p: 2.5 }}>
+            <Paper variant="outlined" sx={{ p: 2.5 }}>
               <Typography fontWeight={800} sx={{ mb: 0.75 }}>
                 Încă nu există recenzii afișate
               </Typography>
@@ -138,7 +138,7 @@ export default function DoctorProfile({ doctor, onBack }) {
                   key={r.id}
                   component="article"
                   variant="outlined"
-                  sx={{ borderRadius: "14px", p: 2 }}
+                  sx={{ p: 2 }}
                 >
                   <Box
                     sx={{

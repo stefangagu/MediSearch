@@ -32,13 +32,12 @@ export default function Dropdown({ trigger, children, id, ariaLabel }) {
         }}
         PaperProps={{
           sx: {
-            width: "min(520px, calc(100vw - 64px))",
-            borderRadius: "14px",
+            minWidth: "min(520px, calc(100vw - 64px))",
             overflow: "hidden",
           },
         }}
       >
-        <Box sx={{ p: 1.5 }}>
+        <Box sx={{ p: 1.5, width: "min(520px, calc(100vw - 64px))" }}>
           {children({ close })}
         </Box>
       </Popover>
