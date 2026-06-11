@@ -19,6 +19,8 @@ import DoctorTable from "./components/DoctorTable.jsx";
 import DoctorProfile from "./components/DoctorProfile.jsx";
 import { doctors } from "./data/doctors.js";
 import { specialtiesRO } from "./data/specialtiesRO.js";
+import { RATING_FILTERS } from "./data/ratingFilters.js";
+import { getDoctorRating } from "./utils/doctorUtils.js";
 
 const CONTAINER_SX = {
   width: "min(1200px, calc(100% - 32px))",
@@ -53,6 +55,7 @@ function getInitialViewMode() {
 export default function App() {
   const [search, setSearch] = useState("");
   const [selectedSpecialties, setSelectedSpecialties] = useState([]);
+  const [selectedRatings, setSelectedRatings] = useState([]);
   const [activeDoctorId, setActiveDoctorId] = useState(() => getDoctorIdFromUrl());
   const [theme, setTheme] = useState(getInitialTheme);
   const [viewMode, setViewMode] = useState(getInitialViewMode);
@@ -85,9 +88,17 @@ export default function App() {
     });
   }, []);
 
+  const handleToggleRating = useCallback((ratingId) => {
+    setSelectedRatings((prev) => {
+      if (prev.includes(ratingId)) return prev.filter((x) => x !== ratingId);
+      return [...prev, ratingId];
+    });
+  }, []);
+
   const handleClear = useCallback(() => {
     setSearch("");
     setSelectedSpecialties([]);
+    setSelectedRatings([]);
   }, []);
 
   const handleViewProfile = useCallback((id) => {
@@ -105,6 +116,14 @@ export default function App() {
     return doctors.find((d) => d.id === activeDoctorId) || null;
   }, [activeDoctorId]);
 
+  const minRatingThreshold = useMemo(() => {
+    if (selectedRatings.length === 0) return null;
+    const mins = selectedRatings.map(
+      (id) => RATING_FILTERS.find((r) => r.id === id)?.min ?? 0
+    );
+    return Math.min(...mins);
+  }, [selectedRatings]);
+
   const filteredDoctors = useMemo(() => {
     return doctors.filter((d) => {
       const matchesSpecialty =
@@ -112,12 +131,16 @@ export default function App() {
           ? true
           : selectedSpecialties.includes(d.specialty);
       if (!matchesSpecialty) return false;
+      if (minRatingThreshold != null) {
+        const rating = getDoctorRating(d);
+        if (rating == null || rating < minRatingThreshold) return false;
+      }
       if (!normalizedQuery) return true;
       const haystack =
         `${d.name} ${d.specialty} ${d.clinic} ${d.location}`.toLowerCase();
       return haystack.includes(normalizedQuery);
     });
-  }, [selectedSpecialties, normalizedQuery]);
+  }, [selectedSpecialties, minRatingThreshold, normalizedQuery]);
 
   return (
     <ThemeProvider theme={muiTheme}>
@@ -214,6 +237,8 @@ export default function App() {
                     selectedSpecialties={selectedSpecialties}
                     allSpecialties={specialtiesRO}
                     onToggleSpecialty={handleToggleSpecialty}
+                    selectedRatings={selectedRatings}
+                    onToggleRating={handleToggleRating}
                     onClear={handleClear}
                     resultsCount={filteredDoctors.length}
                     viewMode={viewMode}

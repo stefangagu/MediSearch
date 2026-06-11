@@ -16,11 +16,14 @@ import GridViewIcon from "@mui/icons-material/GridView";
 import TableRowsIcon from "@mui/icons-material/TableRows";
 import Dropdown from "./Dropdown.jsx";
 import { SPECIALTY_COLORS } from "../data/specialtyColors.js";
+import { RATING_FILTERS } from "../data/ratingFilters.js";
 
 export default function Filters({
   selectedSpecialties,
   allSpecialties,
   onToggleSpecialty,
+  selectedRatings,
+  onToggleRating,
   onClear,
   resultsCount,
   viewMode,
@@ -140,6 +143,79 @@ export default function Filters({
               <Box sx={{ mt: 1.5 }}>
                 <Typography variant="caption" color="text.secondary">
                   Sfat: selectează mai multe specializări pentru rezultate mai largi.
+                </Typography>
+              </Box>
+            </>
+          )}
+        </Dropdown>
+
+        <Dropdown
+          id="rating-panel"
+          ariaLabel="Filtrează după rating"
+          trigger={({ isOpen, toggle, triggerRef }) => (
+            <Badge
+              badgeContent={selectedRatings.length > 0 ? selectedRatings.length : null}
+              color="primary"
+              sx={{ "& .MuiBadge-badge": { top: 8, right: -4 } }}
+            >
+              <Button
+                ref={triggerRef}
+                variant="outlined"
+                size="large"
+                aria-haspopup="dialog"
+                aria-expanded={isOpen}
+                aria-controls="rating-panel"
+                onClick={toggle}
+                endIcon={<KeyboardArrowDownIcon />}
+              >
+                Rating
+              </Button>
+            </Badge>
+          )}
+        >
+          {({ close }) => (
+            <>
+              <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", mb: 2 }}>
+                <Typography variant="subtitle1" fontWeight={800}>
+                  Rating
+                </Typography>
+                <IconButton size="small" onClick={close} aria-label="Închide">
+                  <CloseIcon fontSize="small" />
+                </IconButton>
+              </Box>
+
+              <Box role="list" sx={{ display: "grid", gap: 0.75 }}>
+                {RATING_FILTERS.map((r) => {
+                  const checked = selectedRatings.includes(r.id);
+                  return (
+                    <FormControlLabel
+                      key={r.id}
+                      role="listitem"
+                      control={
+                        <Checkbox
+                          size="small"
+                          checked={checked}
+                          onChange={() => onToggleRating(r.id)}
+                          sx={{ color: "primary.main" }}
+                        />
+                      }
+                      label={<Typography variant="body2">{r.label}</Typography>}
+                      sx={{
+                        m: 0,
+                        px: 1,
+                        py: 0.75,
+                        width: "100%",
+                        "& .MuiFormControlLabel-label": { flex: 1 },
+                        "&:hover": { bgcolor: "action.hover" },
+                      }}
+                    />
+                  );
+                })}
+              </Box>
+
+              <Box sx={{ mt: 1.5 }}>
+                <Typography variant="caption" color="text.secondary">
+                  Sfat: medicii fără recenzii nu vor apărea dacă filtrezi după rating.
                 </Typography>
               </Box>
             </>
