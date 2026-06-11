@@ -8,7 +8,13 @@ import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import { SPECIALTY_COLORS } from "../data/specialtyColors.js";
 import Stars from "./Stars.jsx";
-import { getDoctorRating, getDoctorReviewCount } from "../utils/doctorUtils.js";
+import {
+  getDoctorRating,
+  getDoctorReviewCount,
+  getDoctorClinics,
+  getDoctorCityLabel,
+  getPrimaryClinicName,
+} from "../utils/doctorUtils.js";
 
 export default function DoctorCard({ doctor, onViewProfile }) {
   const rating = getDoctorRating(doctor);
@@ -80,15 +86,16 @@ export default function DoctorCard({ doctor, onViewProfile }) {
               Clinică
             </Typography>
             <Typography variant="body2" sx={{ fontSize: "13px", textAlign: "right" }}>
-              {doctor.clinic}
+              {getPrimaryClinicName(doctor)}
+              {getDoctorClinics(doctor).length > 1 && ` +${getDoctorClinics(doctor).length - 1}`}
             </Typography>
           </Box>
           <Box sx={{ display: "flex", justifyContent: "space-between", gap: 1.5 }}>
             <Typography variant="body2" color="text.secondary" sx={{ fontSize: "13px" }}>
-              Locație
+              Oraș
             </Typography>
             <Typography variant="body2" sx={{ fontSize: "13px", textAlign: "right" }}>
-              {doctor.location}
+              {getDoctorCityLabel(doctor)}
             </Typography>
           </Box>
         </Box>

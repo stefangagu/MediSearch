@@ -3,8 +3,9 @@ export const doctors = [
     id: 1,
     name: "Dr. Ana Popescu",
     specialty: "Cardiologie",
-    clinic: "Clinica Inimii Albastre",
-    location: "București",
+    clinics: [
+      { name: "Clinica Inimii Albastre", city: "București", address: "Str. Plantelor nr. 22, Sector 2, București" }
+    ],
     rating: 4.8,
     reviewCount: 23,
     reviews: [
@@ -35,8 +36,9 @@ export const doctors = [
     id: 2,
     name: "Dr. Mihai Ionescu",
     specialty: "Dermatovenerologie",
-    clinic: "DermaCare",
-    location: "Cluj-Napoca",
+    clinics: [
+      { name: "DermaCare", city: "Cluj-Napoca", address: "Str. Memorandumului nr. 14, Cluj-Napoca, jud. Cluj" }
+    ],
     rating: 4.4,
     reviewCount: 12,
     reviews: [
@@ -60,8 +62,9 @@ export const doctors = [
     id: 3,
     name: "Dr. Elena Dumitrescu",
     specialty: "Pediatrie",
-    clinic: "LittleSteps Medical",
-    location: "Timișoara",
+    clinics: [
+      { name: "LittleSteps Medical", city: "Timișoara", address: "Bd. Take Ionescu nr. 56, Timișoara, jud. Timiș" }
+    ],
     rating: null,
     reviewCount: 0,
     reviews: []
@@ -70,8 +73,9 @@ export const doctors = [
     id: 4,
     name: "Dr. Radu Stan",
     specialty: "Ortopedie și traumatologie",
-    clinic: "MoveWell Ortopedie",
-    location: "Iași",
+    clinics: [
+      { name: "MoveWell Ortopedie", city: "Iași", address: "Str. Păcurari nr. 110, Iași, jud. Iași" }
+    ],
     rating: 4.3,
     reviewCount: 3,
     reviews: [
@@ -84,8 +88,9 @@ export const doctors = [
     id: 5,
     name: "Dr. Ioana Marinescu",
     specialty: "Neurologie",
-    clinic: "NeuroPoint",
-    location: "București",
+    clinics: [
+      { name: "NeuroPoint", city: "București", address: "Calea Victoriei nr. 155, Sector 1, București" }
+    ],
     rating: 4.6,
     reviewCount: 3,
     reviews: [
@@ -98,8 +103,9 @@ export const doctors = [
     id: 6,
     name: "Dr. Andrei Georgescu",
     specialty: "Medicină de familie",
-    clinic: "PrimaryCare Hub",
-    location: "Brașov",
+    clinics: [
+      { name: "PrimaryCare Hub", city: "Brașov", address: "Str. Lungă nr. 30, Brașov, jud. Brașov" }
+    ],
     rating: 4.2,
     reviewCount: 3,
     reviews: [
@@ -112,8 +118,10 @@ export const doctors = [
     id: 7,
     name: "Dr. Sorina Petrescu",
     specialty: "Endocrinologie",
-    clinic: "MetaboHealth",
-    location: "Constanța",
+    clinics: [
+      { name: "MetaboHealth", city: "Constanța", address: "Bd. Tomis nr. 201, Constanța, jud. Constanța" },
+      { name: "Centrul Medical Endomed", city: "București", address: "Str. Dionisie Lupu nr. 44, Sector 1, București" }
+    ],
     rating: 4.5,
     reviewCount: 3,
     reviews: [
@@ -126,8 +134,9 @@ export const doctors = [
     id: 8,
     name: "Dr. Vlad Rusu",
     specialty: "Oftalmologie",
-    clinic: "ClearView Ochi",
-    location: "Sibiu",
+    clinics: [
+      { name: "ClearView Ochi", city: "Sibiu", address: "Str. Mitropoliei nr. 18, Sibiu, jud. Sibiu" }
+    ],
     rating: 4.1,
     reviewCount: 3,
     reviews: [
@@ -140,8 +149,9 @@ export const doctors = [
     id: 9,
     name: "Dr. Cristina Nistor",
     specialty: "Obstetrică-ginecologie",
-    clinic: "WomenFirst",
-    location: "Oradea",
+    clinics: [
+      { name: "WomenFirst", city: "Oradea", address: "Str. Republicii nr. 5, Oradea, jud. Bihor" }
+    ],
     rating: 4.9,
     reviewCount: 3,
     reviews: [

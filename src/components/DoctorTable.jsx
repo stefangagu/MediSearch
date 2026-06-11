@@ -13,13 +13,19 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { SPECIALTY_COLORS } from "../data/specialtyColors.js";
 import Stars from "./Stars.jsx";
-import { getDoctorRating, getDoctorReviewCount } from "../utils/doctorUtils.js";
+import {
+  getDoctorRating,
+  getDoctorReviewCount,
+  getDoctorClinics,
+  getDoctorCityLabel,
+  getPrimaryClinicName,
+} from "../utils/doctorUtils.js";
 
 const COLUMNS = [
   { id: "name", label: "Nume" },
   { id: "specialty", label: "Specializare" },
   { id: "clinic", label: "Clinică" },
-  { id: "location", label: "Locație" },
+  { id: "city", label: "Oraș" },
   { id: "rating", label: "Rating" },
   { id: "actions", label: "Acțiune", sortable: false },
 ];
@@ -44,6 +50,10 @@ export default function DoctorTable({ doctors, onViewProfile }) {
         const ra = getDoctorRating(a) ?? -1;
         const rb = getDoctorRating(b) ?? -1;
         cmp = ra - rb;
+      } else if (orderBy === "clinic") {
+        cmp = getPrimaryClinicName(a).localeCompare(getPrimaryClinicName(b), "ro");
+      } else if (orderBy === "city") {
+        cmp = getDoctorCityLabel(a).localeCompare(getDoctorCityLabel(b), "ro");
       } else {
         cmp = String(a[orderBy] ?? "").localeCompare(String(b[orderBy] ?? ""), "ro");
       }
@@ -95,8 +105,11 @@ export default function DoctorTable({ doctors, onViewProfile }) {
                     }}
                   />
                 </TableCell>
-                <TableCell>{doctor.clinic}</TableCell>
-                <TableCell>{doctor.location}</TableCell>
+                <TableCell>
+                  {getPrimaryClinicName(doctor)}
+                  {getDoctorClinics(doctor).length > 1 && ` +${getDoctorClinics(doctor).length - 1}`}
+                </TableCell>
+                <TableCell>{getDoctorCityLabel(doctor)}</TableCell>
                 <TableCell>
                   {rating != null ? (
                     <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>

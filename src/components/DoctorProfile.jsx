@@ -8,7 +8,7 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import RateReviewOutlinedIcon from "@mui/icons-material/RateReviewOutlined";
 import Stars from "./Stars.jsx";
 import { SPECIALTY_COLORS } from "../data/specialtyColors.js";
-import { getDoctorRating, getDoctorReviewCount } from "../utils/doctorUtils.js";
+import { getDoctorRating, getDoctorReviewCount, getDoctorClinics } from "../utils/doctorUtils.js";
 
 function formatDateRO(iso) {
   try {
@@ -22,6 +22,7 @@ function formatDateRO(iso) {
 export default function DoctorProfile({ doctor, onBack }) {
   const rating = getDoctorRating(doctor);
   const reviewCount = getDoctorReviewCount(doctor);
+  const clinics = getDoctorClinics(doctor);
 
   const reviews = useMemo(() => {
     const list = Array.isArray(doctor.reviews) ? doctor.reviews : [];
@@ -93,22 +94,46 @@ export default function DoctorProfile({ doctor, onBack }) {
           )}
         </Box>
 
-        <Box sx={{ display: "grid", gap: 1.25, pt: 2.5 }}>
-          <Box sx={{ display: "flex", justifyContent: "space-between", gap: 1.5 }}>
-            <Typography variant="body2" color="text.secondary">
-              Clinică
-            </Typography>
-            <Typography variant="body2" fontWeight={600} sx={{ textAlign: "right" }}>
-              {doctor.clinic}
-            </Typography>
-          </Box>
-          <Box sx={{ display: "flex", justifyContent: "space-between", gap: 1.5 }}>
-            <Typography variant="body2" color="text.secondary">
-              Locație
-            </Typography>
-            <Typography variant="body2" fontWeight={600} sx={{ textAlign: "right" }}>
-              {doctor.location}
-            </Typography>
+        <Box sx={{ pt: 2.5 }}>
+          <Typography variant="body2" color="text.secondary" sx={{ mb: 1.25 }}>
+            {clinics.length > 1 ? "Clinici" : "Clinică"}
+          </Typography>
+          <Box
+            sx={{
+              display: "grid",
+              gridTemplateColumns: { xs: "1fr", sm: "repeat(auto-fit, minmax(280px, 1fr))" },
+              gap: 2,
+            }}
+          >
+            {clinics.map((clinic, i) => (
+              <Box key={i}>
+                <Typography variant="body2" fontWeight={700}>
+                  {clinic.name}
+                </Typography>
+                <Typography variant="body2" color="text.secondary" sx={{ mb: 1 }}>
+                  {clinic.address}
+                </Typography>
+                <Box
+                  sx={{
+                    border: 1,
+                    borderColor: "divider",
+                    borderRadius: 1,
+                    overflow: "hidden",
+                    lineHeight: 0,
+                  }}
+                >
+                  <iframe
+                    title={`Hartă ${clinic.name}`}
+                    src={`https://www.google.com/maps?q=${encodeURIComponent(clinic.address)}&output=embed`}
+                    width="100%"
+                    height="220"
+                    style={{ border: 0 }}
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                  />
+                </Box>
+              </Box>
+            ))}
           </Box>
         </Box>
 
