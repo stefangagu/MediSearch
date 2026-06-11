@@ -308,17 +308,13 @@ export default function App() {
             sx={{
               ...CONTAINER_SX,
               display: "flex",
-              justifyContent: "space-between",
               gap: 2,
               py: 2.25,
               flexWrap: "wrap",
             }}
           >
             <Typography variant="caption">
-              © {new Date().getFullYear()} MediSearch • Doar date mock
-            </Typography>
-            <Typography variant="caption" color="text.secondary">
-              React + Vite + MUI
+              © {new Date().getFullYear()} MediSearch
             </Typography>
           </Box>
         </Box>
