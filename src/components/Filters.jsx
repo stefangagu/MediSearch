@@ -8,8 +8,12 @@ import TextField from "@mui/material/TextField";
 import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Divider from "@mui/material/Divider";
+import ToggleButton from "@mui/material/ToggleButton";
+import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import CloseIcon from "@mui/icons-material/Close";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import GridViewIcon from "@mui/icons-material/GridView";
+import TableRowsIcon from "@mui/icons-material/TableRows";
 import Dropdown from "./Dropdown.jsx";
 import { SPECIALTY_COLORS } from "../data/specialtyColors.js";
 
@@ -18,7 +22,9 @@ export default function Filters({
   allSpecialties,
   onToggleSpecialty,
   onClear,
-  resultsCount
+  resultsCount,
+  viewMode,
+  onViewModeChange
 }) {
   const [query, setQuery] = useState("");
   const selectedCount = selectedSpecialties.length;
@@ -145,14 +151,33 @@ export default function Filters({
         </Button>
       </Box>
 
-      <Typography
-        variant="body2"
-        color="text.secondary"
-        aria-live="polite"
-        sx={{ whiteSpace: "nowrap", flexShrink: 0, ml: "auto" }}
-      >
-        {resultsCount} {resultsCount === 1 ? "rezultat" : "rezultate"}
-      </Typography>
+      <Box sx={{ display: "flex", alignItems: "center", gap: 1.5, ml: "auto" }}>
+        <ToggleButtonGroup
+          value={viewMode}
+          exclusive
+          onChange={(e, value) => {
+            if (value !== null) onViewModeChange(value);
+          }}
+          size="small"
+          aria-label="Mod de afișare"
+        >
+          <ToggleButton value="grid" aria-label="Vizualizare tip grilă" sx={{ height: 40 }}>
+            <GridViewIcon fontSize="small" />
+          </ToggleButton>
+          <ToggleButton value="table" aria-label="Vizualizare tip tabel" sx={{ height: 40 }}>
+            <TableRowsIcon fontSize="small" />
+          </ToggleButton>
+        </ToggleButtonGroup>
+
+        <Typography
+          variant="body2"
+          color="text.secondary"
+          aria-live="polite"
+          sx={{ whiteSpace: "nowrap", flexShrink: 0 }}
+        >
+          {resultsCount} {resultsCount === 1 ? "rezultat" : "rezultate"}
+        </Typography>
+      </Box>
     </>
   );
 }

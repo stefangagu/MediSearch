@@ -15,6 +15,7 @@ import { createAppTheme } from "./theme.js";
 import SearchBar from "./components/SearchBar.jsx";
 import Filters from "./components/Filters.jsx";
 import DoctorCard from "./components/DoctorCard.jsx";
+import DoctorTable from "./components/DoctorTable.jsx";
 import DoctorProfile from "./components/DoctorProfile.jsx";
 import { doctors } from "./data/doctors.js";
 import { specialtiesRO } from "./data/specialtiesRO.js";
@@ -44,16 +45,26 @@ function getInitialTheme() {
   return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
 }
 
+function getInitialViewMode() {
+  const stored = localStorage.getItem("viewMode");
+  return stored === "table" ? "table" : "grid";
+}
+
 export default function App() {
   const [search, setSearch] = useState("");
   const [selectedSpecialties, setSelectedSpecialties] = useState([]);
   const [activeDoctorId, setActiveDoctorId] = useState(() => getDoctorIdFromUrl());
   const [theme, setTheme] = useState(getInitialTheme);
+  const [viewMode, setViewMode] = useState(getInitialViewMode);
   const muiTheme = useMemo(() => createAppTheme(theme), [theme]);
 
   useEffect(() => {
     localStorage.setItem("theme", theme);
   }, [theme]);
+
+  useEffect(() => {
+    localStorage.setItem("viewMode", viewMode);
+  }, [viewMode]);
 
   const toggleTheme = useCallback(() => {
     setTheme((t) => (t === "dark" ? "light" : "dark"));
@@ -205,6 +216,8 @@ export default function App() {
                     onToggleSpecialty={handleToggleSpecialty}
                     onClear={handleClear}
                     resultsCount={filteredDoctors.length}
+                    viewMode={viewMode}
+                    onViewModeChange={setViewMode}
                   />
                 </Paper>
 
@@ -231,6 +244,11 @@ export default function App() {
                       Resetează
                     </Button>
                   </Paper>
+                ) : viewMode === "table" ? (
+                  <DoctorTable
+                    doctors={filteredDoctors}
+                    onViewProfile={handleViewProfile}
+                  />
                 ) : (
                   <Box
                     component="section"
