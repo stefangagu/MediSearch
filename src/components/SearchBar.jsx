@@ -10,7 +10,7 @@ export default function SearchBar({ value, onChange }) {
       size="small"
       id="search"
       label="Caută medici"
-      placeholder="Caută medici după nume / specializare / locație"
+      placeholder="Nume/specializare/locatie.."
       autoComplete="off"
       inputProps={{ inputMode: "search" }}
       InputProps={{
