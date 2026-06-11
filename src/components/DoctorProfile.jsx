@@ -3,9 +3,11 @@ import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
+import Chip from "@mui/material/Chip";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import RateReviewOutlinedIcon from "@mui/icons-material/RateReviewOutlined";
 import Stars from "./Stars.jsx";
+import { SPECIALTY_COLORS } from "../data/specialtyColors.js";
 import { getDoctorRating, getDoctorReviewCount } from "../utils/doctorUtils.js";
 
 function formatDateRO(iso) {
@@ -44,72 +46,69 @@ export default function DoctorProfile({ doctor, onBack }) {
             display: "flex",
             justifyContent: "space-between",
             alignItems: "flex-start",
-            gap: 2,
-            pb: 2.5,
-            borderBottom: 1,
-            borderColor: "divider",
-            flexWrap: { xs: "wrap", sm: "nowrap" },
+            gap: 1.5,
+            flexWrap: "wrap",
           }}
         >
-          <Box sx={{ display: "grid", gap: 1 }}>
-            <Typography variant="h5" sx={{ fontWeight: 700, letterSpacing: "-0.3px", fontSize: "20px" }}>
-              {doctor.name}
-            </Typography>
-            <Typography color="primary" sx={{ fontWeight: 700, fontSize: "14px" }}>
-              {doctor.specialty}
-            </Typography>
-          </Box>
-
-          <Paper
-            variant="outlined"
-            aria-label="Rating"
+          <Typography variant="h5" sx={{ fontWeight: 700, letterSpacing: "-0.3px", fontSize: "20px" }}>
+            {doctor.name}
+          </Typography>
+          <Chip
+            label={doctor.specialty}
+            size="small"
             sx={{
-              borderRadius: "14px",
-              px: 1.75,
-              py: 1.5,
-              textAlign: { xs: "left", sm: "right" },
-              minWidth: { sm: 160 },
-              width: { xs: "100%", sm: "auto" },
+              bgcolor: SPECIALTY_COLORS[doctor.specialty] ?? "#6b7280",
+              color: "#fff",
             }}
-          >
-            {rating != null ? (
-              <>
-                <Typography fontWeight={900} fontSize="18px">
-                  {rating.toFixed(1)}
-                </Typography>
-                <Stars value={rating} />
-                <Typography variant="caption" color="text.secondary">
-                  {reviewCount} recenzii
-                </Typography>
-              </>
-            ) : (
-              <Typography variant="caption" color="text.secondary">
-                Fără rating
-              </Typography>
-            )}
-          </Paper>
+          />
         </Box>
 
         <Box
           sx={{
-            display: "grid",
-            gridTemplateColumns: { xs: "1fr", sm: "repeat(2, 1fr)" },
-            gap: 2.5,
-            pt: 2.5,
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            mt: 1.5,
+            pb: 2.5,
+            borderBottom: 1,
+            borderColor: "divider",
           }}
         >
-          <Box sx={{ display: "grid", gap: 1 }}>
-            <Typography variant="caption" color="text.secondary">
+          {rating != null ? (
+            <>
+              <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                <Typography fontWeight={800} fontSize="18px">
+                  {rating.toFixed(1)}
+                </Typography>
+                <Stars value={rating} />
+              </Box>
+              <Typography variant="body2" color="text.secondary">
+                {reviewCount} recenzii
+              </Typography>
+            </>
+          ) : (
+            <Typography variant="body2" color="text.disabled">
+              Nicio recenzie încă
+            </Typography>
+          )}
+        </Box>
+
+        <Box sx={{ display: "grid", gap: 1.25, pt: 2.5 }}>
+          <Box sx={{ display: "flex", justifyContent: "space-between", gap: 1.5 }}>
+            <Typography variant="body2" color="text.secondary">
               Clinică
             </Typography>
-            <Typography variant="body2">{doctor.clinic}</Typography>
+            <Typography variant="body2" fontWeight={600} sx={{ textAlign: "right" }}>
+              {doctor.clinic}
+            </Typography>
           </Box>
-
-          <Box sx={{ display: "grid", gap: 1 }}>
-            <Typography variant="caption" color="text.secondary">
+          <Box sx={{ display: "flex", justifyContent: "space-between", gap: 1.5 }}>
+            <Typography variant="body2" color="text.secondary">
               Locație
             </Typography>
-            <Typography variant="body2">{doctor.location}</Typography>
+            <Typography variant="body2" fontWeight={600} sx={{ textAlign: "right" }}>
+              {doctor.location}
+            </Typography>
           </Box>
         </Box>
 
@@ -119,7 +118,7 @@ export default function DoctorProfile({ doctor, onBack }) {
               Recenzii
             </Typography>
             <Typography variant="body2" color="text.secondary" sx={{ lineHeight: 1.5 }}>
-              În viitor: agregăm recenzii din internet (surse multiple) și le normalizăm într-un scor unitar.
+              În curând: recenzii agregate din mai multe surse, într-un scor unitar.
             </Typography>
           </Box>
 
