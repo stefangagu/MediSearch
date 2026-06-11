@@ -37,6 +37,10 @@ export function createAppTheme(mode) {
             textTransform: "none",
             fontWeight: 600,
           },
+          // 40px to match the small TextField height (see CLAUDE.md)
+          sizeLarge: {
+            height: 40,
+          },
         },
       },
       MuiCard: {

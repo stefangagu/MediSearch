@@ -30,17 +30,7 @@ export default function Filters({
   }, [allSpecialties, query]);
 
   return (
-    <Box
-      sx={{
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center",
-        gap: 2,
-        px: 2.5,
-        py: 1.75,
-        flexWrap: { xs: "wrap", sm: "nowrap" },
-      }}
-    >
+    <>
       <Box sx={{ display: "flex", alignItems: "center", gap: 2, flexWrap: "wrap" }}>
         <Dropdown
           id="specialties-panel"
@@ -54,6 +44,7 @@ export default function Filters({
               <Button
                 ref={triggerRef}
                 variant="outlined"
+                size="large"
                 aria-haspopup="dialog"
                 aria-expanded={isOpen}
                 aria-controls="specialties-panel"
@@ -149,7 +140,7 @@ export default function Filters({
           )}
         </Dropdown>
 
-        <Button variant="outlined" onClick={onClear}>
+        <Button variant="outlined" size="large" onClick={onClear}>
           Resetează filtrele
         </Button>
       </Box>
@@ -158,10 +149,10 @@ export default function Filters({
         variant="body2"
         color="text.secondary"
         aria-live="polite"
-        sx={{ whiteSpace: "nowrap", flexShrink: 0 }}
+        sx={{ whiteSpace: "nowrap", flexShrink: 0, ml: "auto" }}
       >
         {resultsCount} {resultsCount === 1 ? "rezultat" : "rezultate"}
       </Typography>
-    </Box>
+    </>
   );
 }
