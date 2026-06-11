@@ -10,7 +10,7 @@ export default function SearchBar({ value, onChange }) {
       size="small"
       id="search"
       label="Caută medici"
-      placeholder="Nume/specializare/locatie.."
+      placeholder="Nume/specializare/oras.."
       autoComplete="off"
       inputProps={{ inputMode: "search" }}
       InputProps={{
@@ -22,7 +22,7 @@ export default function SearchBar({ value, onChange }) {
       }}
       value={value}
       onChange={(e) => onChange(e.target.value)}
-      sx={{ flex: "1 1 260px", maxWidth: 320 }}
+      sx={{ flex: { xs: "1 1 100px", sm: "1 1 260px" }, maxWidth: 320, minWidth: 0 }}
     />
   );
 }

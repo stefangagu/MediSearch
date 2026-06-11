@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { ThemeProvider } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
 import CssBaseline from "@mui/material/CssBaseline";
 import AppBar from "@mui/material/AppBar";
 import Avatar from "@mui/material/Avatar";
@@ -20,7 +21,7 @@ import DoctorProfile from "./components/DoctorProfile.jsx";
 import { doctors } from "./data/doctors.js";
 import { specialtiesRO } from "./data/specialtiesRO.js";
 import { RATING_FILTERS } from "./data/ratingFilters.js";
-import { getDoctorRating } from "./utils/doctorUtils.js";
+import { getDoctorRating, getDoctorClinics } from "./utils/doctorUtils.js";
 
 const CONTAINER_SX = {
   width: "min(1200px, calc(100% - 32px))",
@@ -60,6 +61,8 @@ export default function App() {
   const [theme, setTheme] = useState(getInitialTheme);
   const [viewMode, setViewMode] = useState(getInitialViewMode);
   const muiTheme = useMemo(() => createAppTheme(theme), [theme]);
+  const isMobile = useMediaQuery(muiTheme.breakpoints.down("sm"));
+  const effectiveViewMode = isMobile ? "grid" : viewMode;
 
   useEffect(() => {
     localStorage.setItem("theme", theme);
@@ -136,8 +139,8 @@ export default function App() {
         if (rating == null || rating < minRatingThreshold) return false;
       }
       if (!normalizedQuery) return true;
-      const haystack =
-        `${d.name} ${d.specialty} ${d.clinic} ${d.location}`.toLowerCase();
+      const clinicTerms = getDoctorClinics(d).flatMap((c) => [c.name, c.city, c.address]);
+      const haystack = `${d.name} ${d.specialty} ${clinicTerms.join(" ")}`.toLowerCase();
       return haystack.includes(normalizedQuery);
     });
   }, [selectedSpecialties, minRatingThreshold, normalizedQuery]);
@@ -227,8 +230,8 @@ export default function App() {
                     display: "flex",
                     alignItems: "center",
                     flexWrap: "wrap",
-                    gap: 2,
-                    px: 2.5,
+                    gap: { xs: 1, sm: 2 },
+                    px: { xs: 1.5, sm: 2.5 },
                     py: 1.75,
                   }}
                 >
@@ -263,13 +266,13 @@ export default function App() {
                       color="text.secondary"
                       sx={{ lineHeight: 1.5, mb: 2.5 }}
                     >
-                      Încearcă alt nume/locație/clinică sau debifează unele specializări.
+                      Încearcă alt nume/oraș/clinică sau debifează unele specializări.
                     </Typography>
                     <Button variant="outlined" onClick={handleClear}>
                       Resetează
                     </Button>
                   </Paper>
-                ) : viewMode === "table" ? (
+                ) : effectiveViewMode === "table" ? (
                   <DoctorTable
                     doctors={filteredDoctors}
                     onViewProfile={handleViewProfile}
